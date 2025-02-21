@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from "react";
 import "../../app.css";
 
 export default function DialogBox({ open, onClose, data }) {
+    console.log("data is",data);
     const dialogRef = useRef(null);
 
     // Close dialog when clicking outside
@@ -30,7 +31,7 @@ export default function DialogBox({ open, onClose, data }) {
                             &times; {/* Close icon */}
                         </button>
                         <div className="dialog-content">
-                            <h3>Hi {data.name}, 👋</h3>
+                            <h3>Hi {data.username}, 👋</h3>
                             <h4>
                                 Thanks for reaching out! I appreciate your time and
                                 look forward to connecting. 😊

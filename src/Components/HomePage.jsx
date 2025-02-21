@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import profile from '../assets/profile.jpg';
+import profile from '../assets/profile6.jpg';
 import reactjs from '../assets/react.png';
 import html from '../assets/html-5.png';
 import js from '../assets/js.png';
@@ -25,38 +25,75 @@ import github from '../assets/github.png';
 import telegram from '../assets/telegram.png';
 import DialogBox from './UsableComponents/DialogBox';
 import { colors } from '@mui/material';
-
-
-
-
-
-
-
+import emailjs from 'emailjs-com';
 
 
 function HomePage() {
   const [dialogOpen,setDialogOpen]=useState(false);
-  const [data,setData]=useState({
-    name:"",
-    email:"",
-    message:""
+  const [data, setData] = useState({
+    username: "",
+    email: "",
+    message: "",
   });
 
-  const handleChange =(e)=>{
-    const {name,value} = e.target;
-    const val=value;
-    console.log("value is",val);
-    setData((prev) => ({
-      ...prev,
-      [name]: val
+  // Handle input changes
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setData((prevData) => ({
+      ...prevData,
+      [name]: value,
     }));
-    console.log("data's is",data);
-  }
+     setError((prevErrors) => ({ ...prevErrors, [name]: "" }));
 
-  const handleSubmit= () =>{
-    console.log('hello')
-    setDialogOpen(true);
-  }
+  };
+  const [error,setError]=useState({
+    username:"",
+    email:"",
+    message:""
+  })
+  
+  const validateFields = () => {
+    let newErrors = {}; 
+    if (!data.username) newErrors.username = "Your name is required";
+    if (!data.email) newErrors.email = "Email is required";
+    else if (!/\S+@\S+\.\S+/.test(data.email)) newErrors.email = "Invalid email format";
+    if (!data.message) newErrors.message = "Message is required";
+    console.log("Validation Errors:", newErrors); // Debug logs
+    setError(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+  
+  
+  // Handle form submission
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+  
+    if (!validateFields()) {
+      console.log("Validation failed. Fix errors before submitting.");
+      return; // Exit if validation fails
+    }
+  
+    try {
+    
+      const result = await emailjs.send(
+        "service_2omatgu", // Replace with your EmailJS Service ID
+        "template_5aw2um8", // Replace with your EmailJS Template ID
+        {
+          name: data.username,
+          email: data.email,
+          message: data.message,
+        },
+        "1nSq_4Y-mQ95uLvmq" // Replace with your EmailJS Public Key
+      );
+      console.log("Email sent successfully:", result.text);
+      // Optionally reset form data here
+      setDialogOpen(true);
+    } catch (error) {
+      console.error("Failed to send email:", error);
+    }
+  };
+   
+
   document.addEventListener("DOMContentLoaded", () => {
     const menuToggle = document.querySelector(".menu-toggle");
     const navLinks = document.querySelector(".nav-links");
@@ -69,48 +106,37 @@ function HomePage() {
   
   
   return (
-    <div>
-        <div className="main">
+    <body>
         <header>
-  <div class="header">
-    <div class="profile">
-      {/* <img src="your-profile-image.jpg" alt="Profile"> */}
-      {/* <a href="#">My Portfolio</a> */}
-    </div>
-    <div class="nav">
-      <button class="menu-toggle">☰</button> 
-      <ul class="nav-links">
-        <a href="#about-section">About</a>
-        <a href="#skill-section">Skills</a>
-        <a href="#project-section">Projects</a>
-       <a href="#contact-section">Contact</a>
-      </ul>
-    </div>
-  </div>
-</header>
-
-            <section className='section' id='about-section'>
-                <img src={profile} 
-                alt="profile" 
-                />
-                <div className="name">
-                <h2>SATHIYA N</h2>
-                <h4>SOFTWARE DEVELOPER</h4>
-                </div>
-              
-                <div className="content">
-                   
-                    <h1>About</h1>
-                    <div className="para">
-                    <p className='para'>
-                    Versatile and innovative software developer with a strong foundation in full-stack development. Proficient in front-end technologies like HTML, CSS, JavaScript, and React.js, complemented by expertise in backend frameworks such as Java, Node.js, and Express.js. Skilled in managing databases with MySQL and MongoDB, ensuring secure, efficient, and scalable solutions. During my internship at Trugo Technology, I gained hands-on experience in React, Node.js, and MySQL, where I worked on developing dynamic web applications and executing CRUD operations. Adept at building user-focused, high-performance web applications and integrating APIs seamlessly. Passionate about leveraging the MERN stack to create dynamic, reliable, and impactful software solutions. Continuously driven to embrace new challenges, learn emerging technologies, and contribute to delivering exceptional software experiences.                    </p>
-                    </div>
-                   
-                </div>
-               
-            </section>
-           {/* New Skills Section */}
-           <section className="skills-section" id='skill-section'>
+            <a href="#" className='logo'>Sathiya</a>
+            <i  class='bx bx-menu' id='menu-icon'></i>
+            <nav>
+              <a href="#about-section" className='active'>About</a>
+              <a href="#skill-section">Skills</a>
+              <a href="#project-section">Projects</a>
+              <a href="#internship-section">Experience</a>
+              <a href="#contact-section">Contact</a>
+            </nav>
+        </header>
+      <section className='home'>
+        <div className="home-detail">
+          <h1>SATHIYA N</h1>
+          <h2>SOFTWARE DEVELOPER</h2>
+          <p>Versatile and innovative software developer with a strong foundation in full-stack development. Proficient in front-end technologies like HTML, CSS, JavaScript, and React.js, complemented by expertise in backend frameworks such as Java, Node.js, and Express.js. Skilled in managing databases with MySQL and MongoDB, ensuring secure, efficient, and scalable solutions. During my internship at Trugo Technology, I gained hands-on experience in React, Node.js, and MySQL, where I worked on developing dynamic web applications and executing CRUD operations. Adept at building user-focused, high-performance web applications and integrating APIs seamlessly. Passionate about leveraging the MERN stack to create dynamic, reliable, and impactful software solutions. Continuously driven to embrace new challenges, learn emerging technologies, and contribute to delivering exceptional software experiences.                    </p>
+          <div className="btn-links">
+           <a href="#" className='btn'>Download Resume</a>
+           <div className="links">
+                <a href="#"><i className="bx bxl-github" ></i></a>
+                <a href="#"><i class='bx bxl-linkedin-square'></i></a>
+                <a href="#"><i class='bx bxl-gmail'></i></a>
+                <a href="#"><i class='bx bxl-whatsapp'></i></a>
+           </div>
+          </div>
+        </div>
+                
+      </section>
+       {/* New Skills Section */}
+           {/* <section className="skills-section" id='skill-section'>
 
   <div className="skills-container">
     <h3>Technical Skills</h3>
@@ -168,39 +194,30 @@ function HomePage() {
 
 
  
-        </section>
+        </section> */}
 
-        <section className="project-section" id='project-section'>
+        {/* <section className="project-section" id='project-section'>
   <h3>Projects</h3>
   <div className="project-container">
     <div className="project-item">
       <img src={spicy} alt="HTML" />
       <h4>Spicy Hut
       <p>The SpicyHut restaurant website features a responsive UI showcasing their menu, services, and contact details.</p>
+      <a href="https://github.com/Nsathiya2003/spicyHut" target="_blank">View code</a>
       </h4>
     </div>
     <div className="project-item">
       <img src={pic} alt="HTML" />
       <h4>User Authentication System
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum, ea.</p>
+      <p>Implemented a secure user authentication system with login and signup functionality for account access.</p>
+      <a href="https://github.com/Nsathiya2003/authentication-frontend" target='_blank'>View Code</a>
       </h4>
     </div>
-    {/* <div className="project-item">
-      <img src={pic} alt="HTML" />
-      <h4>Spicy Hut
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum, ea.</p>
-      </h4>
+   
     </div>
-    <div className="project-item">
-      <img src={pic} alt="HTML" />
-      <h4>Spicy Hut
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum, ea.</p>
-      </h4>
-    </div> */}
-    </div>
-</section>
+</section> */}
 {/* <!-- Internship Experience Section --> */}
-<section className="internship-section" id="internship-section">
+{/* <section className="internship-section" id="internship-section">
   <h3>Experience</h3>
   <div className="internship-container">
     <div className="internship-item">
@@ -233,9 +250,10 @@ function HomePage() {
       
     </div>
   </div>
-</section>
+</section> */}
 {/* Eductaion section */}
-<div className="education-section" id="education-section">
+  
+{/* <div className="education-section" id="education-section">
   <h3>Education</h3>
   <div className="education-container">
     <div className="education-item">
@@ -267,11 +285,11 @@ function HomePage() {
       </div>
     </div>
   </div>
-</div>
+</div> */}
 
 
 
-<section className="contact-section" id='contact-section'>
+{/* <section className="contact-section" id='contact-section'>
   <h3 style={{textAlign:"start"}}>Contact</h3>
   <div className="contact-container">
     <div className="contact-item">
@@ -305,8 +323,11 @@ function HomePage() {
     <div className="contact-item">
     <h3>Direct Message Me..!!</h3>
         <div className="fields">
-        <input type="text" name="name" value={data.name} onChange={handleChange} placeholder='Enter your name' />
+        <input type="text" name="username" value={data.username} onChange={handleChange} placeholder='Enter your name' />
+         {error.username && <p style={{fontSize:"12px",color:"red"}}>{error.username}</p>}
         <input type="emal" name='email' value={data.email} onChange={handleChange} placeholder='Enter your email' />
+        {error.email && <p style={{fontSize:"12px",color:"red"}}>{error.email}</p>}
+
         <textarea
          type="text" 
          name='message'
@@ -314,22 +335,25 @@ function HomePage() {
          aria-multiline
          placeholder='Enter your message'
           />
+        {error.message && <p style={{fontSize:"12px",color:"red"}}>{error.message}</p>}
+
         </div>
         <button type='submit' className='btn' onClick={handleSubmit}>Send</button>
 
       </div>
     </div>
-</section>
-        </div>
-        {dialogOpen && (
+</section> */}
+     {dialogOpen && (
           <DialogBox 
             open={dialogOpen}
             onClose={()=>setDialogOpen(false)}
             data={data}
           />
         )}
-    </div>
-   
+    </body>
+      
+
+             
   )
 }
 
