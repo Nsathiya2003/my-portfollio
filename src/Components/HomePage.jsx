@@ -132,7 +132,7 @@ function HomePage() {
                 <a href="#"><i class='bx bxl-whatsapp'></i></a>
            </div>
           </div>
-        </div>
+        </div>  
                 
       </section>
        {/* New Skills Section */}
