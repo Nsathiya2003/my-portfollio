@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import profile from '../assets/profile6.jpg';
+import profile from '../assets/sathiya.png';
 import reactjs from '../assets/react.png';
 import html from '../assets/html-5.png';
 import js from '../assets/js.png';
@@ -103,38 +103,311 @@ function HomePage() {
       navLinks.classList.toggle("open");
     });
   });
-  
+  const [experience,setExperience]=useState(true);
+  const [education,setEducation]=useState(false);
+  const [skills,setSkills]=useState(false);
+  const [contact,setContact]=useState(false);
+
+  const [activeSection, setActiveSection] = useState("experience");
+
+  const handleClick = (e,field)=>{
+    console.log("helooo")
+    e.preventDefault();
+    setActiveSection(field);
+   
+  }
   
   return (
     <body>
         <header>
             <a href="#" className='logo'>Sathiya</a>
-            <i  class='bx bx-menu' id='menu-icon'></i>
+            <i  className='bx bx-menu' id='menu-icon'></i>
             <nav>
               <a href="#about-section" className='active'>About</a>
               <a href="#skill-section">Skills</a>
-              <a href="#project-section">Projects</a>
+              <a href="#project-section">Resume</a>
               <a href="#internship-section">Experience</a>
               <a href="#contact-section">Contact</a>
             </nav>
         </header>
-      <section className='home'>
+        {/* ---Home section--- */}
+      <section className='home '>
         <div className="home-detail">
           <h1>SATHIYA N</h1>
-          <h2>SOFTWARE DEVELOPER</h2>
+          <h2>
+            I'm a  
+            <span >Software developer</span>
+            {/* <span style={{ "--i": 2 }} data-text="Front-end developer">Front-end developer</span>
+            <span style={{ "--i": 1 }} data-text="Back-end developer">Back-end developer</span> */}
+          </h2> 
           <p>Versatile and innovative software developer with a strong foundation in full-stack development. Proficient in front-end technologies like HTML, CSS, JavaScript, and React.js, complemented by expertise in backend frameworks such as Java, Node.js, and Express.js. Skilled in managing databases with MySQL and MongoDB, ensuring secure, efficient, and scalable solutions. During my internship at Trugo Technology, I gained hands-on experience in React, Node.js, and MySQL, where I worked on developing dynamic web applications and executing CRUD operations. Adept at building user-focused, high-performance web applications and integrating APIs seamlessly. Passionate about leveraging the MERN stack to create dynamic, reliable, and impactful software solutions. Continuously driven to embrace new challenges, learn emerging technologies, and contribute to delivering exceptional software experiences.                    </p>
           <div className="btn-links">
            <a href="#" className='btn'>Download Resume</a>
            <div className="links">
                 <a href="#"><i className="bx bxl-github" ></i></a>
-                <a href="#"><i class='bx bxl-linkedin-square'></i></a>
-                <a href="#"><i class='bx bxl-gmail'></i></a>
-                <a href="#"><i class='bx bxl-whatsapp'></i></a>
+                <a href="#"><i className='bx bxl-linkedin-square'></i></a>
+                <a href="#"><i className='bx bxl-gmail'></i></a>
+                <a href="#"><i className='bx bxl-whatsapp'></i></a>
            </div>
           </div>
         </div>  
-                
+          <div className="home-img">
+              <div className="img-box">
+                <div className="img-item">
+                  <img src={profile} alt="Profile" />
+                </div>
+              </div>
+            
+            </div>   
       </section>
+      <section className='skills '>
+        <h2 className="heading">My<span>Skills</span></h2>
+        <div className="skills-container">
+          <div className="skills-box">
+            <div className="icon">
+            <i className='bx bxl-html5'></i>
+              <a href='#'><i className='bx bx-arrow-back'></i></a>
+            </div>
+            <h3>Html</h3>
+            <p>The backbone of web pages, defining structure and content.</p>
+            </div>
+          
+          <div className="skills-box">
+            <div className="icon">
+            <i className='bx bxl-css3'></i>
+            <a href='#'><i className='bx bx-arrow-back'></i></a>
+            </div>
+            <h3>Css</h3>
+            <p>Used to style web pages with colors, layouts, and animations.</p>
+            </div>
+            <div className="skills-box">
+            <div className="icon">
+            <i className='bx bxl-tailwind-css'></i>
+            <a href='#'><i className='bx bx-arrow-back'></i></a>
+            </div>
+            <h3>Tailwind css</h3>
+            <p>A utility-first CSS framework for rapid UI development.</p>
+            </div>
+          <div className="skills-box">
+            <div className="icon">
+            <i className='bx bxl-javascript'></i>
+            <a href='#'><i className='bx bx-arrow-back'></i></a>
+            </div>
+            <h3>Javascript</h3>
+            <p>Makes web pages interactive with dynamic elements and logic.</p>
+            </div>
+          <div className="skills-box">
+            <div className="icon">
+            <i className='bx bxl-react'></i>
+            <a href='#'><i className='bx bx-arrow-back'></i></a>
+            </div>
+            <h3>React.js</h3>
+            <p>A JavaScript library for building modern UI components efficiently.</p>
+            </div>
+          <div className="skills-box">
+            <div className="icon">
+            <i className='bx bxl-nodejs'></i>
+            <a href='#'><i className='bx bx-arrow-back'></i></a>
+            </div>
+            <h3>Node.js</h3>
+            <p>A runtime environment for running JavaScript on the server.</p>
+            </div>
+          <div className="skills-box">
+            <div className="icon">
+            <i className='bx bx-server'></i>
+            <a href='#'><i className='bx bx-arrow-back'></i></a>
+            </div>
+            <h3>Express.js</h3>
+            <p>A lightweight framework for building web servers with Node.js.</p>
+            </div>
+          <div className="skills-box">
+            <div className="icon">
+              <i className='bx bxs-data'></i>
+              <a href='#'><i className='bx bx-arrow-back'></i></a>
+            </div>
+            <h3>MySql</h3>
+            <p>A relational database used to store and manage structured data.</p>
+            </div>
+          <div className="skills-box">
+            <div className="icon">
+              <i className='bx bxl-mongodb'></i>
+              <a href='#'><i className='bx bx-arrow-back'></i></a>
+            </div>
+            <h3>MongoDB</h3>
+    <p>A NoSQL database designed for high performance and scalability.</p>
+          </div>
+        </div>
+       
+      </section>
+      <section className="resume active">
+          <div className="resume-container">
+            <div className="resume-box">
+              <h2>Why Hire Me?</h2>
+              <p>I have strong skills in web development and a passion for creating user-friendly applications. I am dedicated and committed to delivering high-quality work.</p>
+            <button className={`resume-btn ${activeSection === 'experience' ? "active" : ""}`} 
+                    onClick={(e) => handleClick(e, 'experience')}>
+              Experience
+            </button>
+
+            <button className={`resume-btn ${activeSection === 'education' ? "active" : ""}`} 
+                    onClick={(e) => handleClick(e, 'education')}>
+              Education
+            </button>
+
+            <button className={`resume-btn ${activeSection === 'skills' ? "active" : ""}`} 
+                    onClick={(e) => handleClick(e, 'skills')}>
+              Skills
+            </button>
+
+            <button className={`resume-btn ${activeSection === 'contact' ? "active" : ""}`} 
+                    onClick={(e) => handleClick(e, 'contact')}>
+              About Me
+            </button>
+
+
+            </div>
+            <div className="resume-box">
+              {activeSection==='experience' &&
+                <div className='resume-detail-experience'>
+                    <h2 className='heading'>My<span>Experience</span></h2>
+                <div className="resume-list">
+                  <div className="resume-skills-item">
+                      <div className="resume-item1">
+                        <h3 className='resume-title'>Software Developer Internship<span className='year'>Apr 2024- Sep 2024</span></h3>
+                        <p className='company'>Trugo Technologies,Salem.</p>
+                      </div>
+                      <ul className='resume-ul-list'>
+                        <li>Developed dynamic, user-centric web applications using React.js, improving user experience and interface interactivity</li>
+                        <li>Implemented CRUD operations in Node.js, integrating MySQL to ensure fast and efficient data retrieval and management</li>
+                        <li>Collaborated with UI/UX designers to ensure seamless integration between front-end and back-end technologies</li>
+                        <li>Improved system security by implementing user authentication and authorization protocols in Node.js</li>
+                        <li>Built and maintained RESTful APIs, integrating third-party services and ensuring smooth communication between the front-end and back-end</li>
+                        <li>Worked with version control systems like Git, ensuring proper code collaboration and tracking changes effectively</li>
+                        <li>Enhanced the scalability of the application by refactoring code and improving performance across various modules</li> 
+                        <p style={{color:"aqua",letterSpacing:1}}>
+                          <strong style={{
+                          color:"lightgreen",}}>Technologies : </strong>Html,Css,JavaScript,React.js,Node.js,Express.js,MySQL</p>
+                        <p style={{color:"aqua",letterSpacing:1}}>
+                          <strong style={{
+                          color:"lightgreen",}}>Worked Projects : </strong>Salesman-tracking,VKR Club</p>
+
+                      </ul>
+
+                  </div>
+                </div>
+               </div>
+              }
+               {activeSection==='education'  &&
+                <div className='education-detail-education'>
+                <h2 className='heading'>My<span>Education</span></h2>
+                <div className="education-list">
+                    <div className="education-item">
+                      <p className='year'>2020-2024</p>
+                      <h4>B.E-Electronics and Communication Engineering</h4>
+                      <p>CGPA - 8.7</p>
+                      <p>Dhirajlal Gandhi College of Technology,Salem</p>
+                    </div>
+                    <div className="education-item">
+                      <p className='year'>2018-2020</p>
+                      <h3>Higher Secondary Certificate(HSC)</h3>
+                      <p>Percentage - 65 %</p>
+                      <p>Government Girls Higher Secondary School ,Mecheri</p>
+                    </div> 
+                     <div className="education-item">
+                      <p className='year'>2017-2018</p>
+                      <h3>Secondary School Leaving Certificate(SSLC)</h3>
+                      <p>Percentage - 85 %</p>
+                      <p> Government Secondary School ,Aranganur</p>
+                    </div>
+                </div>
+               </div>
+              }
+               {activeSection==='skills'  &&
+                <div className='resume-detail-skills'>
+                <h2 className='heading'>My<span>Skills</span></h2>
+                <div className="resume-skills-list">
+                  <div className="resume-skills-item">
+                      <i className='bx bxl-html5'></i>
+                      <span>HTML</span>
+                  </div>
+                  <div className="resume-skills-item">
+                      <i className='bx bxl-css3'></i>
+                      <span>CSS3</span>
+                  </div>
+                  <div className="resume-skills-item">
+                      <i className='bx bxl-tailwind-css'></i>
+                      <span>Tailwind CSS</span>
+                  </div>
+                  <div className="resume-skills-item">
+                      <i className='bx bxl-javascript'></i>
+                      <span>JavaScript</span>
+                  </div>
+                  <div className="resume-skills-item">
+                      <i className='bx bxl-react'></i>
+                      <span>React.js</span>
+                  </div>
+                  <div className="resume-skills-item">
+                      <i className='bx bxl-nodejs'></i>
+                      <span>Node.js</span>
+                  </div>
+                  <div className="resume-skills-item">
+                      <i className='bx bx-server'></i>
+                      <span>Express.js</span>
+                  </div>
+                  <div className="resume-skills-item">
+                      <i className='bx bxs-data'></i>
+                      <span>MySQL</span>
+                  </div>
+                  <div className="resume-skills-item">
+                      <i className='bx bxl-mongodb'></i>
+                      <span>MongoDB</span>
+                  </div>
+              </div>
+
+               </div>
+              
+              }
+               {activeSection==='contact'  &&
+                <div className='resume-detail-about'>
+                <h2 className='heading'>About<span>Me</span></h2>
+                <div className="resume-about-list">
+                  <div className="resume-about-item">
+                    <p>Name <span>Sathiya Nallathambi</span></p>
+                  </div>
+                  <div className="resume-about-item">
+                    <p>Gender <span>Female</span></p>
+                  </div>
+                  <div className="resume-about-item">
+                    <p>Age <span>22 Years Old</span></p>
+                  </div>
+                  <div className="resume-about-item">
+                    <p>City <span>Salem</span></p>
+                  </div>
+                  <div className="resume-about-item">
+                    <p>State <span>Tamilnadu</span></p>
+                  </div>
+                  <div className="resume-about-item">
+                    <p>Country <span>India</span></p>
+                  </div>
+                  <div className="resume-about-item">
+                    <p>Email <span><a href='nsathiya757@gmail.com'>nsathiya757@gmail.com</a></span></p>
+                  </div> 
+                   
+                  <div className="resume-about-item">
+                    <p>Github<span><a href='https://github.com/Sathiya8'>https://github.com/Sathiya8</a></span></p>
+                  </div>
+                  <div className="resume-about-item">
+                    <p>Linkedin<span><a href='https://www.linkedin.com/in/sathiya-n-14395a253'>https://www.linkedin.com/in/sathiya-n-14395a253</a></span></p>
+                  </div>
+                </div>
+              
+              
+               </div>
+              }
+            </div>
+          </div>
+      </section>
+
        {/* New Skills Section */}
            {/* <section className="skills-section" id='skill-section'>
 
