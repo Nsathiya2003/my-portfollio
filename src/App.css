@@ -303,8 +303,9 @@ section.active {
 }
 
 .skills-box p{
-  font-size: 17px;
+  font-size: 16px;
   margin-top: 10px;
+
 }
 
 /* resume section */
@@ -439,4 +440,245 @@ section.active {
   margin-left: 10px;
 }
 
+.project-container{
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(25rem, 1fr));
+  gap: 3.6rem;
+}
+.project-box .numb{
+  font-size: 5.5rem;
+  -webkit-text-stroke: .09rem var(--white-color);
+  color: transparent;
+  line-height: 1;
+}
+.project-detail{
+  display: none;
+}
+.project-detail.active{
+  display: block;
+}
+.project-box h3{
+  margin: 0.5rem 0px 1rem;
+  font-size: 2rem;
+}
+.project-box p{
+  font-size: 1rem;
+  font-weight: 700;
+  /* word-spacing: 1px; */
+  /* margin: 1rem 0rem 0.1rem; */
+}
+.project-detail .tech{
+  font-weight: 650;
+  margin: 1rem 0;
+  padding-bottom: 2rem;
+  color: var(--main-color);
+  border-bottom: 1px solid var(--white-color);
+  letter-spacing: 1px;
+}
+.project-detail .live-github a{
+  position: relative;
+  display: inline-flex;
+  padding: 1rem;
+  font-size: 2rem;
+  color: var(--white-color);
+  background: var(--second-bg-color);
+  border-radius: 50%;
+}
+.project-detail .live-github a i{
+  color: var(--white-color);
+}
+.project-box .live-github a:first-child {
+  margin-right: 0.5rem;
+}
+.project-box .live-github a:first-child i{
+  transform: rotate(135deg);
+}
+.project-box .live-github a span{
+  position: absolute;
+  top: -50%;
+  left: 50%;
+  transform: translateY(-50%);
+  white-space: nowrap;
+  padding: .3rem 1rem;
+  pointer-events: none;
+  background-color: var(--white-color);
+  color: var(--bg-color);
+  border-radius: .3rem;
+  opacity: 0;
+  scale: .9;
+  transition: .2s;
+  
+}
+.project-box .live-github a:hover span{
+  opacity: 1;
+  top:-70%;
+  scale: 1.1;
+  font-size: 1rem;
+}
+.project-box .project-carousel{
+  width: 100%;
+  height: 24vw;
+  overflow: hidden;
+}
+.project-carousel .img-slide .img-item img{
+  width: 100%;
+  height: 25vw;
+  border-radius: 10px;
 
+}
+.project-box .project-carousel .img-slide {
+  display: grid;
+  grid-auto-columns: 100%;
+  grid-auto-flow: column;
+  gap: 0;
+  height: inherit;
+  transition: .2s;
+}
+.project-box .project-carousel .img-item{
+  height: inherit;
+}
+.project-carousel .img-item img{
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 5rem;
+}
+.project-box .navigation{
+  text-align: right;
+  margin-top: 20px;
+}
+.project-box .navigation button{
+  padding: 10px 20px;
+  margin: 4px;
+  background-color: var(--second-bg-color);
+  border: 1px solid var(--main-color);
+  border-radius: 8px;
+}
+.project-box .navigation button i{
+  color: var(--main-color);
+  cursor: pointer;
+}
+.arrow-left:disabled,
+.arrow-right:disabled {
+  opacity: 0.5; 
+  cursor: not-allowed;
+  background-color: #ccc; 
+  color: #666; 
+}
+.contact-container{
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(25rem, 1fr));
+  /* gap:4rem; */
+}
+.contact-container .contact-box:first-child{
+  align-self: center;
+}
+.contact-box .desc{
+  margin-top: 8px;
+} 
+.contact-box .contact-detail{
+ display: flex;
+ align-items: center; 
+}
+.contact-detail i{
+  display: inline-flex;
+  background: var(--second-bg-color);
+  border: 2px solid var(--main-color);
+  border-radius: 25px;
+  color: var(--white-color);
+  padding: 5px;
+  margin: 10px 10px;
+} 
+.contact-detail .detail p:first-child{
+   color: var(--main-color);
+   font-size: 14px;
+
+}
+.contact-detail .detail a{
+  color: var(--white-color);
+  font-size: 14px;
+  text-decoration: underline;
+}
+ .address{
+  color: var(--white-color);
+}
+.contact-detail .detail a:hover{
+  color: lightcoral;
+
+}
+.contact-box .desc{
+  font-size: 15px;
+
+}
+.contact-detail .detail p{
+  color: var(--main-color);
+  font-size: 15px;
+}
+.contact-detail i:hover{
+  cursor: pointer;
+  color: var(--main-color);
+}
+.contact-box .btn{
+  display: inline-block;
+  padding: 1rem 3rem;
+  margin-top: 1rem;
+  background-color: var(--main-color);
+  border: 2px solid var(--main-color);
+  border-radius: 2rem;
+  box-shadow: 0 0 0.5rem var(--main-color);
+  color: var(--bg-color);
+  font-weight: 500;
+  transition: .5s;
+}
+.contact-box.btn:hover{
+  background-color: transparent;
+  color: var(--main-color);
+  box-shadow: none;
+}
+.contact-box form{
+  background: var(--second-bg-color);
+  padding: 2rem 3rem 2rem;
+  border-radius: 10px;
+  text-align: center;
+}
+.contact-box .field-box{
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  gap: 20px;
+}
+
+.contact-box .field-box textarea{
+  grid-column: 1/-1;
+  height: 13vh;
+  resize: none;
+}
+.field-box input{
+  padding: 5px 5px;
+  width:100% ;
+}
+.contact-box .field-box input,
+.contact-box .field-box textarea{
+  padding: 8px 15px 20px;
+  background-color: var(--bg-color);
+  border: 1px solid var(--bg-color);
+  border-radius: 5px;
+  color: var(--white-color);
+}
+.contact-box .field-box input::placeholder,
+.contact-box .field-box textarea::placeholder{
+  /* color: var(--white-color); */
+  font-size: 13px;
+  margin: 10px;
+}
+.contact-box .heading{
+  text-align: center;
+  font-size: 30px;
+}
+/* .contact-box h2{
+  font-size: 40px;
+} */
+.contact-box .field-box input:focus,
+.contact-box .field-box textarea:focus{
+  border: 2px solid var(--main-color);
+}

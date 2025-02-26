@@ -13,7 +13,7 @@ import teamwork from '../assets/teamwork.png';
 import time from '../assets/time.png';
 import problem from '../assets/problem.png';
 import pic from '../assets/user1.png';
-import spicy from '../assets/spicy.png';
+import spicy from '../assets/spicyimg.png';
 import phone1 from '../assets/phone1.png';
 import phone2 from '../assets/phone2.png';
 import insta from '../assets/insta.png';
@@ -26,6 +26,8 @@ import telegram from '../assets/telegram.png';
 import DialogBox from './UsableComponents/DialogBox';
 import { colors } from '@mui/material';
 import emailjs from 'emailjs-com';
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 
 function HomePage() {
@@ -33,6 +35,8 @@ function HomePage() {
   const [data, setData] = useState({
     username: "",
     email: "",
+    mobileno:"",
+    subject:"",
     message: "",
   });
 
@@ -43,49 +47,32 @@ function HomePage() {
       ...prevData,
       [name]: value,
     }));
-     setError((prevErrors) => ({ ...prevErrors, [name]: "" }));
 
   };
-  const [error,setError]=useState({
-    username:"",
-    email:"",
-    message:""
-  })
-  
-  const validateFields = () => {
-    let newErrors = {}; 
-    if (!data.username) newErrors.username = "Your name is required";
-    if (!data.email) newErrors.email = "Email is required";
-    else if (!/\S+@\S+\.\S+/.test(data.email)) newErrors.email = "Invalid email format";
-    if (!data.message) newErrors.message = "Message is required";
-    console.log("Validation Errors:", newErrors); // Debug logs
-    setError(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
+
+
   
   
   // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
-    if (!validateFields()) {
-      console.log("Validation failed. Fix errors before submitting.");
-      return; // Exit if validation fails
-    }
-  
-    try {
+   try {
     
       const result = await emailjs.send(
         "service_2omatgu", // Replace with your EmailJS Service ID
         "template_5aw2um8", // Replace with your EmailJS Template ID
         {
           name: data.username,
+          mobileno: data.mobileno,
           email: data.email,
+          subject:data.subject,
           message: data.message,
         },
         "1nSq_4Y-mQ95uLvmq" // Replace with your EmailJS Public Key
       );
       console.log("Email sent successfully:", result.text);
+      toast.success("Your message send successfully")
+      
       // Optionally reset form data here
       setDialogOpen(true);
     } catch (error) {
@@ -103,10 +90,7 @@ function HomePage() {
       navLinks.classList.toggle("open");
     });
   });
-  const [experience,setExperience]=useState(true);
-  const [education,setEducation]=useState(false);
-  const [skills,setSkills]=useState(false);
-  const [contact,setContact]=useState(false);
+
 
   const [activeSection, setActiveSection] = useState("experience");
 
@@ -114,8 +98,51 @@ function HomePage() {
     console.log("helooo")
     e.preventDefault();
     setActiveSection(field);
-   
-  }
+   }
+
+  const images =[spicy,pic,spicy,pic]
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const handleNext = () => {
+    if (currentIndex < images.length - 1) {
+      setCurrentIndex(currentIndex + 1);
+    }
+  };
+
+  const handlePrev = () => {
+    if (currentIndex > 0) {
+      setCurrentIndex(currentIndex - 1);
+    }
+  };
+  const projects = [
+    {
+      id: 1,
+      title: "Spicy Hut",
+      description: "A modern and responsive restaurant website showcasing menu items, customer reviews, and online reservations.",
+      tech: "HTML, CSS",
+      image: spicy, // Change to your actual image
+      liveLink: "#",
+      githubLink: "#",
+    },
+    {
+      id: 2,
+      title: "User Authentication System",
+      description: "A secure authentication system with user registration, login, and role-based access control, using JWT and password hashing.",
+      tech: "HTML, CSS, JavaScript, React.js, Node.js, Express.js, MySQL",
+      image: pic, // Change to your actual image
+      liveLink: "#",
+      githubLink: "#",
+    },
+    {
+      id: 3,
+      title: "Portfolio Website",
+      description: "A personal portfolio website featuring project showcases, a blog section, and contact information with interactive animations.",
+      tech: "Next.js, TailwindCSS, Framer Motion",
+      image: spicy, // Change to your actual image
+      liveLink: "#",
+      githubLink: "#",
+    },
+  ];
   
   return (
     <body>
@@ -131,7 +158,7 @@ function HomePage() {
             </nav>
         </header>
         {/* ---Home section--- */}
-      <section className='home '>
+      <section className='home  '>
         <div className="home-detail">
           <h1>SATHIYA N</h1>
           <h2>
@@ -239,7 +266,7 @@ function HomePage() {
         </div>
        
       </section>
-      <section className="resume active">
+      <section className="resume ">
           <div className="resume-container">
             <div className="resume-box">
               <h2>Why Hire Me?</h2>
@@ -407,6 +434,123 @@ function HomePage() {
             </div>
           </div>
       </section>
+      <section className="projects ">
+        <h2 className="heading">Latest<span>Projects</span></h2>
+        <div className="project-container">
+        <div className="project-box">
+      {/* Project Details Section */}
+      <div className="project-details">
+        {projects.map((project, index) => (
+          <div key={project.id} className={`project-detail ${index === currentIndex ? "active" : ""}`}>
+            {index === currentIndex && (
+              <>
+                <p className="numb">{`0${project.id}`}</p>
+                <h3>{project.title}</h3>
+                <p>{project.description}</p>
+                <div className="tech">
+                  <p>{project.tech}</p>
+                </div>
+                <div className="live-github">
+                  <a href={project.liveLink} target="_blank" rel="noopener noreferrer">
+                    <i className="bx bx-arrow-back"></i>
+                    <span>Live Project</span>
+                  </a>
+                  <a href={project.githubLink} target="_blank" rel="noopener noreferrer">
+                    <i className="bx bxl-github"></i>
+                    <span>Github Repository</span>
+                  </a>
+                </div>
+              </>
+            )}
+          </div>
+        ))}
+      </div>
+        </div>
+        <div className="project-box">
+
+      {/* Image Carousel */}
+      <div className="project-carousel">
+        <div className="img-slide" style={{ transform: `translateX(-${currentIndex * 100}%)`, transition: "0.5s ease-in-out" }}>
+          {projects.map((project, index) => (
+            <div key={index} className="img-item">
+              <img src={project.image} alt={`slide-${index}`} />
+            </div>
+          ))}
+        </div>
+      </div>
+{/* </div> */}
+      {/* Navigation */}
+      <div className="navigation">
+        <button className="arrow-left" onClick={() => setCurrentIndex((prev) => Math.max(prev - 1, 0))} disabled={currentIndex === 0}>
+          <i className="bx bx-chevron-left"></i>
+        </button>
+        <button className="arrow-right" onClick={() => setCurrentIndex((prev) => Math.min(prev + 1, projects.length - 1))} disabled={currentIndex === projects.length - 1}>
+          <i className="bx bx-chevron-right"></i>
+        </button>
+      </div>
+
+      {/* Number Navigation (Click to Select) */}
+      {/* <div className="number-navigation">
+        {projects.map((project, index) => (
+          <button key={project.id} className={index === currentIndex ? "active" : ""} onClick={() => setCurrentIndex(index)}>
+            {project.id}
+          </button>
+        ))}
+      </div> */}
+    </div>
+        </div>
+      </section>
+      <section className="contact active">
+    <div className="contact-container">
+      <div className="contact-box">
+        <h2>Let's Work Together </h2>
+        {/* <p className='desc'>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat sapiente tempora officia nulla sed magni neque repudiandae fugiat, non modi.</p> */}
+        <div className="contact-detail">
+            <i className='bx bxs-envelope'></i>
+              <div className="detail">
+                <p>Email</p>
+                <a href="nsathiya757@gmail.com">nsathiya757@gmail.com</a>
+              </div>
+       </div>
+       <div className="contact-detail">
+          <a href='#'></a>
+            <i className='bx bxl-github'></i>
+              <div className="detail">
+                <p>Github</p>
+                <a href="https://github.com/Nsathiya2003">View Github</a>
+              </div>
+       </div>
+       <div className="contact-detail">
+            <i className='bx bxl-linkedin'></i>
+              <div className="detail">
+                <p>LinedIn</p>
+                <a href='https://www.linkedin.com/in/sathiya-n-14395a253'>View profile</a>
+              </div>
+       </div>
+       <div className="contact-detail">
+            <i className='bx bxs-map'></i>
+              <div className="detail">
+                <p >Address</p>
+                <p style={{color:'white'}}>3-313 Pullanur,Salem,Tamilnadu</p>
+              </div>
+       </div>
+      </div>
+      <div className="contact-box">
+        <form action=''>
+          <h2 className='heading'>Contact<span>Me!</span></h2>
+           <div className="field-box">
+             <input type="text" placeholder='Enter your name' name='username' onChange={handleChange} value={data?.username}/>
+             <input type="text" placeholder='Enter your email' name='email' onChange={handleChange} value={data?.email}/>
+             <input type="text" placeholder='Enter your mobile no'name='mobileno'onChange={handleChange} value={data?.mobileno}/>
+             <input type="text" placeholder='Email subject'name='subject'  onChange={handleChange} value={data?.subject}/>
+             <textarea type="text" placeholder='Message' name='message' onChange={handleChange} value={data?.message}/>
+           </div>
+           <button type='submit' className='btn' onClick={handleSubmit}>Send Message</button>
+        </form>
+      </div>
+    </div>
+      </section>
+  <ToastContainer/>
 
        {/* New Skills Section */}
            {/* <section className="skills-section" id='skill-section'>
