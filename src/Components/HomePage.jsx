@@ -1,30 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import profile from '../assets/sathiya.png';
-import reactjs from '../assets/react.png';
-import html from '../assets/html-5.png';
-import js from '../assets/js.png';
-import css from'../assets/css.png';
-import nodejs from '../assets/nodejs.png';
-import java from '../assets/java.png';
-import mysql from '../assets/mysql.png';
-import mongodb from '../assets/mongodb.png';
-import communication from '../assets/communication.png';
-import teamwork from '../assets/teamwork.png';
-import time from '../assets/time.png';
-import problem from '../assets/problem.png';
+import resume from '../assets/sathiya_resume.png';
 import pic from '../assets/user1.png';
 import spicy from '../assets/spicyimg.png';
-import phone1 from '../assets/phone1.png';
-import phone2 from '../assets/phone2.png';
-import insta from '../assets/insta.png';
-import whatsapp from '../assets/whatsapp.png';
-import address from '../assets/address.png';
-import email from '../assets/mail.png';
-import linkedin from '../assets/linkedin.png';
-import github from '../assets/github.png';
-import telegram from '../assets/telegram.png';
+import portfolio from '../assets/portfolio.png';
 import DialogBox from './UsableComponents/DialogBox';
-import { colors } from '@mui/material';
 import emailjs from 'emailjs-com';
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -56,29 +36,42 @@ function HomePage() {
   // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
-   try {
-    
+    try {
       const result = await emailjs.send(
-        "service_2omatgu", // Replace with your EmailJS Service ID
-        "template_5aw2um8", // Replace with your EmailJS Template ID
+        "service_2omatgu",
+        "template_5aw2um8",
         {
           name: data.username,
           mobileno: data.mobileno,
           email: data.email,
-          subject:data.subject,
+          subject: data.subject,
           message: data.message,
         },
-        "1nSq_4Y-mQ95uLvmq" // Replace with your EmailJS Public Key
+        "1nSq_4Y-mQ95uLvmq"
       );
+  
       console.log("Email sent successfully:", result.text);
-      toast.success("Your message send successfully")
-      
-      // Optionally reset form data here
-      setDialogOpen(true);
+  
+      // Check if toast is being executed
+      console.log("Showing toast message...");
+      toast.success("Your message was sent successfully!");
+  
+      setData({
+        username: "",
+        email: "",
+        mobileno: "",
+        subject: "",
+        message: "",
+      });
+  
     } catch (error) {
       console.error("Failed to send email:", error);
+      toast.error("Failed to send message. Try again later.");
     }
   };
+  
+  
+  
    
 
   document.addEventListener("DOMContentLoaded", () => {
@@ -103,78 +96,137 @@ function HomePage() {
   const images =[spicy,pic,spicy,pic]
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  const handleNext = () => {
-    if (currentIndex < images.length - 1) {
-      setCurrentIndex(currentIndex + 1);
-    }
-  };
-
-  const handlePrev = () => {
-    if (currentIndex > 0) {
-      setCurrentIndex(currentIndex - 1);
-    }
-  };
+ 
   const projects = [
     {
       id: 1,
-      title: "Spicy Hut",
-      description: "A modern and responsive restaurant website showcasing menu items, customer reviews, and online reservations.",
-      tech: "HTML, CSS",
-      image: spicy, // Change to your actual image
-      liveLink: "#",
-      githubLink: "#",
+      title: "Portfolio Website",
+      description: "A sleek and interactive personal portfolio website showcasing skills, projects, and achievements. Designed with a modern UI and smooth animations, it provides visitors with an engaging experience. The site includes sections such as About Me, Projects, Contact, and a dynamic blog feature.",
+      tech: "Html,Css,Javascript,React.js",
+      image: portfolio, // Replace with actual image
+      liveLink: "https://github.com/Nsathiya2003/my-portfollio", // Add actual live link
+      githubLink: "https://github.com/Nsathiya2003/my-portfollio", // Add actual GitHub link
     },
     {
       id: 2,
       title: "User Authentication System",
-      description: "A secure authentication system with user registration, login, and role-based access control, using JWT and password hashing.",
+      description: "A full-stack authentication system that ensures secure user login and registration. Features include JWT-based authentication, password hashing using bcrypt, and role-based access control. Users can reset passwords, update profiles, and securely store session tokens.",
       tech: "HTML, CSS, JavaScript, React.js, Node.js, Express.js, MySQL",
-      image: pic, // Change to your actual image
-      liveLink: "#",
-      githubLink: "#",
+      image: pic, // Replace with actual image
+      liveLink: "https://github.com/Nsathiya2003/authentication-frontend", // Add actual live link
+      githubLink: "https://github.com/Nsathiya2003/authentication-frontend", // Add actual GitHub link
     },
     {
       id: 3,
-      title: "Portfolio Website",
-      description: "A personal portfolio website featuring project showcases, a blog section, and contact information with interactive animations.",
-      tech: "Next.js, TailwindCSS, Framer Motion",
-      image: spicy, // Change to your actual image
-      liveLink: "#",
-      githubLink: "#",
+      title: "Spicy Hut",
+      description: "A fully responsive restaurant website designed to enhance online food ordering and reservations. It features an interactive menu, customer reviews, contact forms, and a reservation system, optimized for both desktop and mobile users.",
+      tech: "HTML, CSS",
+      image: spicy, // Replace with actual image
+      liveLink: "https://github.com/Nsathiya2003/spicyHut", // Add actual live link
+      githubLink: "https://github.com/Nsathiya2003/spicyHut", // Add actual GitHub link
     },
   ];
   
+  const [activateSection, setActivateSection] = useState(
+    localStorage.getItem("activeSection") || "home"
+  );
+  const [isFirstLoad, setIsFirstLoad] = useState(true);
+  
+  useEffect(() => {
+    localStorage.setItem("activeSection", activateSection);
+    setIsFirstLoad(false); // After first render, set it to false
+  }, [activateSection]);
+  
+  const handleSectionChange = (section) => {
+    setActivateSection(section);
+  };
+  const [showPdf,setShowPdf] = useState(false);
+  
+
+
+  
+  const resumePDF = '/resume.pdf';
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const handleMenuToggle = () => {
+    setMenuOpen(!menuOpen);
+  };
+
   return (
     <body>
-        <header>
-            <a href="#" className='logo'>Sathiya</a>
-            <i  className='bx bx-menu' id='menu-icon'></i>
-            <nav>
-              <a href="#about-section" className='active'>About</a>
-              <a href="#skill-section">Skills</a>
-              <a href="#project-section">Resume</a>
-              <a href="#internship-section">Experience</a>
-              <a href="#contact-section">Contact</a>
-            </nav>
-        </header>
+      <ToastContainer position="top-right" autoClose={3000} />
+
+      <header>
+  <a href="#" className="logo">Sathiya</a>
+
+  {/* ✅ Menu Icon (Only Visible on Small Screens) */}
+  <i className={`bx bx-menu ${menuOpen ? "bx-x" : ""}`} id="menu-icon" onClick={handleMenuToggle}></i>
+
+  {/* ✅ Navigation Menu */}
+  <nav className={menuOpen ? "active" : ""}>
+    <a href="#home-section" className={activateSection === "home" ? "active" : ""} onClick={() => handleSectionChange("home")}>
+      Home
+    </a>
+    <a href="#skill-section" className={activateSection === "skills" ? "active" : ""} onClick={() => handleSectionChange("skills")}>
+      Skills
+    </a>
+    <a href="#resume-section" className={activateSection === "resume" ? "active" : ""} onClick={() => handleSectionChange("resume")}>
+      Resume
+    </a>
+    <a href="#projects-section" className={activateSection === "projects" ? "active" : ""} onClick={() => handleSectionChange("projects")}>
+      Projects
+    </a>
+    <a href="#contact-section" className={activateSection === "contact" ? "active" : ""} onClick={() => handleSectionChange("contact")}>
+      Contact
+    </a>
+  </nav>
+</header>
+
+
+      {/*  Bars background*/}
+      <div className={`bars-box ${isFirstLoad ? "active" : ""}`}>
+      {[...Array(6)].map((_, i) => (
+        <div key={i} className="bar" style={{ "--i": i + 1 }}></div>
+      ))}
+    </div>
+
+
         {/* ---Home section--- */}
-      <section className='home  '>
+        <section className={`home ${activateSection === 'home' ? 'active' : ''}`}>
+        
         <div className="home-detail">
           <h1>SATHIYA N</h1>
           <h2>
             I'm a  
             <span >Software developer</span>
-            {/* <span style={{ "--i": 2 }} data-text="Front-end developer">Front-end developer</span>
-            <span style={{ "--i": 1 }} data-text="Back-end developer">Back-end developer</span> */}
+         
           </h2> 
           <p>Versatile and innovative software developer with a strong foundation in full-stack development. Proficient in front-end technologies like HTML, CSS, JavaScript, and React.js, complemented by expertise in backend frameworks such as Java, Node.js, and Express.js. Skilled in managing databases with MySQL and MongoDB, ensuring secure, efficient, and scalable solutions. During my internship at Trugo Technology, I gained hands-on experience in React, Node.js, and MySQL, where I worked on developing dynamic web applications and executing CRUD operations. Adept at building user-focused, high-performance web applications and integrating APIs seamlessly. Passionate about leveraging the MERN stack to create dynamic, reliable, and impactful software solutions. Continuously driven to embrace new challenges, learn emerging technologies, and contribute to delivering exceptional software experiences.                    </p>
           <div className="btn-links">
-           <a href="#" className='btn'>Download Resume</a>
+          <a href="#" className="btn" onClick={() => setShowPdf(true)}>
+        View Resume
+      </a>
+          {showPdf && (
+        <div className="pdf-modal">
+          <div className="pdf-container">
+            {/* Close Button */}
+            <button className="close-btn" onClick={() => setShowPdf(false)}>✖</button>
+            
+            {/* Resume Image */}
+            <img src={resume} alt="Resume" className="resume-img" />
+          </div>
+        </div>
+      )}
+
+      {/* Download Link */}
+      {/* <a href={resumePDF} download className="btn">
+        Download Resume
+      </a> */}
            <div className="links">
-                <a href="#"><i className="bx bxl-github" ></i></a>
-                <a href="#"><i className='bx bxl-linkedin-square'></i></a>
-                <a href="#"><i className='bx bxl-gmail'></i></a>
-                <a href="#"><i className='bx bxl-whatsapp'></i></a>
+                <a href="https://github.com/Nsathiya2003" target="_blank"><i className="bx bxl-github" ></i></a>
+                <a href="https://www.linkedin.com/in/sathiya-n-14395a253" target="_blank"><i className='bx bxl-linkedin-square'></i></a>
+                <a href="nsathiya757@gmail.com"><i className='bx bxl-gmail' target="_blank"></i></a>
+                <a href="http://www.whatsapp.com"><i className='bx bxl-whatsapp' target="_blank"></i></a>
            </div>
           </div>
         </div>  
@@ -187,7 +239,8 @@ function HomePage() {
             
             </div>   
       </section>
-      <section className='skills '>
+      <section className={`skills ${activateSection === 'skills' ? 'active' : ''}`}>
+     
         <h2 className="heading">My<span>Skills</span></h2>
         <div className="skills-container">
           <div className="skills-box">
@@ -266,7 +319,8 @@ function HomePage() {
         </div>
        
       </section>
-      <section className="resume ">
+      <section className={`resume ${activateSection === 'resume' ? 'active' : ''}`}>
+
           <div className="resume-container">
             <div className="resume-box">
               <h2>Why Hire Me?</h2>
@@ -313,7 +367,7 @@ function HomePage() {
                         <li>Enhanced the scalability of the application by refactoring code and improving performance across various modules</li> 
                         <p style={{color:"aqua",letterSpacing:1}}>
                           <strong style={{
-                          color:"lightgreen",}}>Technologies : </strong>Html,Css,JavaScript,React.js,Node.js,Express.js,MySQL</p>
+                          color:"lightgreen",}}>Technologies : </strong>JavaScript,React.js,Node.js,Express.js,MySQL</p>
                         <p style={{color:"aqua",letterSpacing:1}}>
                           <strong style={{
                           color:"lightgreen",}}>Worked Projects : </strong>Salesman-tracking,VKR Club</p>
@@ -434,73 +488,60 @@ function HomePage() {
             </div>
           </div>
       </section>
-      <section className="projects ">
+      <section className={`projects ${activateSection === 'projects' ? 'active' : ''}`}>
         <h2 className="heading">Latest<span>Projects</span></h2>
         <div className="project-container">
         <div className="project-box">
       {/* Project Details Section */}
-      <div className="project-details">
-        {projects.map((project, index) => (
-          <div key={project.id} className={`project-detail ${index === currentIndex ? "active" : ""}`}>
-            {index === currentIndex && (
-              <>
-                <p className="numb">{`0${project.id}`}</p>
-                <h3>{project.title}</h3>
-                <p>{project.description}</p>
-                <div className="tech">
-                  <p>{project.tech}</p>
-                </div>
-                <div className="live-github">
-                  <a href={project.liveLink} target="_blank" rel="noopener noreferrer">
-                    <i className="bx bx-arrow-back"></i>
-                    <span>Live Project</span>
-                  </a>
-                  <a href={project.githubLink} target="_blank" rel="noopener noreferrer">
-                    <i className="bx bxl-github"></i>
-                    <span>Github Repository</span>
-                  </a>
-                </div>
-              </>
-            )}
+          <div className="project-details">
+            {projects.map((project, index) => (
+              <div key={project.id} className={`project-detail ${index === currentIndex ? "active" : ""}`}>
+                {index === currentIndex && (
+                  <>
+                    <p className="numb">{`0${project.id}`}</p>
+                    <h3>{project.title}</h3>
+                    <p>{project.description}</p>
+                    <div className="tech">
+                      <p>{project.tech}</p>
+                    </div>
+                    <div className="live-github">
+                      <a href={project.liveLink} target="_blank" rel="noopener noreferrer">
+                        <i className="bx bx-arrow-back"></i>
+                        <span>Live Project</span>
+                      </a>
+                      <a href={project.githubLink} target="_blank" rel="noopener noreferrer">
+                        <i className="bx bxl-github"></i>
+                        <span>Github Repository</span>
+                      </a>
+                    </div>
+                  </>
+                )}
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
         </div>
         <div className="project-box">
-
-      {/* Image Carousel */}
-      <div className="project-carousel">
-        <div className="img-slide" style={{ transform: `translateX(-${currentIndex * 100}%)`, transition: "0.5s ease-in-out" }}>
-          {projects.map((project, index) => (
-            <div key={index} className="img-item">
-              <img src={project.image} alt={`slide-${index}`} />
+          <div className="project-carousel">
+            <div className="img-slide" style={{ transform: `translateX(-${currentIndex * 100}%)`, transition: "0.5s ease-in-out" }}>
+              {projects.map((project, index) => (
+                <div key={index} className="img-item">
+                  <img src={project.image} alt={`slide-${index}`} />
+                </div>
+              ))}
             </div>
-          ))}
+          </div>
+          <div className="navigation">
+            <button className="arrow-left" onClick={() => setCurrentIndex((prev) => Math.max(prev - 1, 0))} disabled={currentIndex === 0}>
+              <i className="bx bx-chevron-left"></i>
+            </button>
+            <button className="arrow-right" onClick={() => setCurrentIndex((prev) => Math.min(prev + 1, projects.length - 1))} disabled={currentIndex === projects.length - 1}>
+              <i className="bx bx-chevron-right"></i>
+            </button>
+          </div>
         </div>
-      </div>
-{/* </div> */}
-      {/* Navigation */}
-      <div className="navigation">
-        <button className="arrow-left" onClick={() => setCurrentIndex((prev) => Math.max(prev - 1, 0))} disabled={currentIndex === 0}>
-          <i className="bx bx-chevron-left"></i>
-        </button>
-        <button className="arrow-right" onClick={() => setCurrentIndex((prev) => Math.min(prev + 1, projects.length - 1))} disabled={currentIndex === projects.length - 1}>
-          <i className="bx bx-chevron-right"></i>
-        </button>
-      </div>
-
-      {/* Number Navigation (Click to Select) */}
-      {/* <div className="number-navigation">
-        {projects.map((project, index) => (
-          <button key={project.id} className={index === currentIndex ? "active" : ""} onClick={() => setCurrentIndex(index)}>
-            {project.id}
-          </button>
-        ))}
-      </div> */}
-    </div>
         </div>
       </section>
-      <section className="contact active">
+      <section className={`contact ${activateSection === 'contact' ? 'active' : ''}`}>
     <div className="contact-container">
       <div className="contact-box">
         <h2>Let's Work Together </h2>
@@ -513,7 +554,6 @@ function HomePage() {
               </div>
        </div>
        <div className="contact-detail">
-          <a href='#'></a>
             <i className='bx bxl-github'></i>
               <div className="detail">
                 <p>Github</p>
@@ -550,7 +590,6 @@ function HomePage() {
       </div>
     </div>
       </section>
-  <ToastContainer/>
 
        {/* New Skills Section */}
            {/* <section className="skills-section" id='skill-section'>

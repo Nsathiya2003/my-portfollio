@@ -25,18 +25,73 @@ html {
   --diabled-color:#fff3;
 }
  /* Home section*/
-header{
+/* ✅ Header Styling */
+header {
   position: fixed;
-  top: 0px;
-  left: 0px;
-  padding: 2rem 9% ;
+  top: 0;
+  left: 0;
   width: 100%;
+  padding: 1.5rem 9%;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  background: #1f242d;
   z-index: 100;
-  background-color: #1f242d;
 }
+
+/* ✅ Hide Menu Icon on Large Screens */
+#menu-icon {
+  display: none;
+  font-size: 28px;
+  color: var(--white-color);
+  cursor: pointer;
+}
+
+/* ✅ Navigation Styling */
+nav {
+  display: flex;
+  gap: 2rem;
+}
+
+nav a {
+  font-size: 18px;
+  color: var(--white-color);
+  font-weight: 500;
+  text-decoration: none;
+}
+
+nav a:hover,
+nav a.active {
+  color: var(--main-color);
+}
+
+/* 📌 Responsive Navbar for Mobile */
+@media screen and (max-width: 768px) {
+  /* ✅ Show Menu Icon on Small Screens */
+  #menu-icon {
+    display: block;
+  }
+
+  /* ✅ Hide Nav Links Initially */
+  nav {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: #1f242d;
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+    padding: 1.5rem 0;
+    display: none; /* Hidden by default */
+  }
+
+  /* ✅ Show Navbar When Active */
+  nav.active {
+    display: flex;
+  }
+}
+
 .logo{
   font-size: 2rem;
   color: var(--white-color);
@@ -160,6 +215,7 @@ section.active {
   background-color: transparent;
   color: var(--main-color);
   box-shadow: none;
+  cursor: pointer;
 }
 .btn-links .links{
   margin: 1rem 3rem ;
@@ -194,7 +250,8 @@ section.active {
   justify-content: center;
   align-items: center;
   overflow: hidden;
-  
+  z-index: 1; /* Keeps it below modal */
+
 
 }
 .home-img .img-box::before,
@@ -419,26 +476,114 @@ section.active {
   opacity: 1;
   transform: scale(1);
 } */
+/* 📌 General Styling */
+/* 📌 Modern About Section */
 .resume-about-list {
-  padding: 20px;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
-  gap: 30px;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+  padding: 10px;
+  width: 100%;
 }
 
-.resume-about-item:last-child {
-  grid-column: span 2; /* Make the last item take the full width */
+/* 📌 Beautiful Card Style */
+.resume-about-item {
+  display: flex;
+  align-items: center;
+  background: linear-gradient(135deg, #2a2e35, #1f242d);
+  padding: 15px;
+  border-radius: 12px;
+  border: 1px solid var(--main-color);
+  box-shadow: 0px 5px 15px rgba(0, 255, 255, 0.2);
+  transition: 0.4s ease-in-out;
 }
-.resume-about-item span, .resume-about-item span a{
-  color:var(--main-color);
-  
+
+.resume-about-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 8px 20px rgba(0, 255, 255, 0.4);
+  cursor: pointer;
 }
-.resume-about-item span a{
-  margin-left: 10px;
+
+/* 📌 Icons for Each Detail */
+.resume-about-item i {
+  font-size: 24px;
+  color: var(--main-color);
+  margin-right: 12px;
 }
-.resume-about-item span{
-  margin-left: 10px;
+
+/* 📌 Text Styling */
+.resume-about-item p {
+  font-size: 14px;
+  color: var(--white-color);
+  margin: 0;
+  font-weight: 500;
 }
+
+/* 📌 Highlighted Text */
+.resume-about-item span, 
+.resume-about-item span a {
+  font-weight: bold;
+  color: var(--main-color);
+  text-decoration: none;
+  margin-left: 5px;
+}
+
+.resume-about-item a:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+/* 📌 Mobile Friendly (≤ 390px) */
+@media screen and (max-width: 390px) {
+  .resume-about-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .resume-about-item {
+    flex-direction: column;
+    text-align: center;
+    padding: 12px;
+  }
+
+  .resume-about-item i {
+    margin-bottom: 5px;
+  }
+
+  .resume-about-item:hover {
+    transform: none;
+  }
+
+  .resume-about-item p {
+    font-size: 14px;
+  }
+
+  .resume-about-item span, 
+  .resume-about-item span a {
+    font-size: 14px;
+  }
+}
+
+
+/* 📌 Small Screen Styling (≤ 390px) */
+@media screen and (max-width: 390px) {
+ 
+  .resume-about-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center the items */
+    gap: 10px;
+  }
+
+  .resume-about-item {
+    width: 90%; /* Increase width but keep it balanced */
+    padding: 20px;
+    font-size: 14px;
+    text-align: center;
+  }
+}
+
 
 .project-container{
   display: grid;
@@ -462,8 +607,10 @@ section.active {
   font-size: 2rem;
 }
 .project-box p{
-  font-size: 1rem;
-  font-weight: 700;
+  font-size: 15px;
+  margin-top: 8px;
+  font-weight:540;
+  line-height: 1.4;
   /* word-spacing: 1px; */
   /* margin: 1rem 0rem 0.1rem; */
 }
@@ -516,9 +663,10 @@ section.active {
   font-size: 1rem;
 }
 .project-box .project-carousel{
-  width: 100%;
+  width: 120%;
   height: 24vw;
   overflow: hidden;
+  border: 1px solid var(--main-color);
 }
 .project-carousel .img-slide .img-item img{
   width: 100%;
@@ -585,9 +733,9 @@ section.active {
   display: inline-flex;
   background: var(--second-bg-color);
   border: 2px solid var(--main-color);
-  border-radius: 25px;
+  border-radius: 12px;
   color: var(--white-color);
-  padding: 5px;
+  padding: 10px;
   margin: 10px 10px;
 } 
 .contact-detail .detail p:first-child{
@@ -598,7 +746,7 @@ section.active {
 .contact-detail .detail a{
   color: var(--white-color);
   font-size: 14px;
-  text-decoration: underline;
+  /* text-decoration: underline; */
 }
  .address{
   color: var(--white-color);
@@ -631,7 +779,7 @@ section.active {
   font-weight: 500;
   transition: .5s;
 }
-.contact-box.btn:hover{
+.contact-box .btn:hover{
   background-color: transparent;
   color: var(--main-color);
   box-shadow: none;
@@ -656,6 +804,7 @@ section.active {
 .field-box input{
   padding: 5px 5px;
   width:100% ;
+  transition: .5s;
 }
 .contact-box .field-box input,
 .contact-box .field-box textarea{
@@ -679,6 +828,436 @@ section.active {
   font-size: 40px;
 } */
 .contact-box .field-box input:focus,
-.contact-box .field-box textarea:focus{
-  border: 2px solid var(--main-color);
+.contact-box .field-box textarea:focus {
+  border: 1px solid var(--main-color);
+  outline: none;
+  box-shadow: 0px 0px 10px var(--main-color);
 }
+/* Bars Container */
+.bars-box {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+/* Individual Bars */
+.bars-box .bar {
+  width: 10px;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.1);
+  margin: 0 2px;
+  transform: translateY(-100%);
+  transition: transform 0.5s ease-in-out;
+}
+
+/* Trigger animation only on first load */
+.bars-box.active .bar {
+  animation: show-bars 0.5s ease-in-out both;
+  animation-delay: calc(0.1s * var(--i));
+}
+
+/* Keyframes for the bar animation */
+@keyframes show-bars {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+.pdf-modal {
+  position: fixed; /* Ensures it covers everything */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999; /* Makes sure it's always on top */
+}
+
+.pdf-container {
+  background: #fff;
+  padding: 20px;
+  cursor: pointer;
+  border-radius: 8px;
+  text-align: center;
+  max-width: 60%;
+  max-height: 90%;
+  overflow: auto;
+  position: relative;
+  z-index: 10000;
+}
+
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: transparent;
+  color: red;
+  border: none;
+  /* padding: 5px 10px; */
+  cursor: pointer;
+  font-size: 18px;
+  border-radius: 5px;
+}
+
+.resume-img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 5px;
+}
+
+
+
+
+/* ========== Mobile Responsive Styling (Max Width: 390px) ========== */
+@media screen and (max-width: 395px) {
+
+  /* ✅ Responsive Header */
+  header {
+    padding: 1rem 5%;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .logo {
+    font-size: 1.5rem; /* Reduce size for smaller screens */
+  }
+
+  nav a {
+    font-size: 14px;
+    margin-left: 1rem; /* Reduce spacing */
+  }
+
+  /* ✅ Adjust Section Layout */
+  section {
+    padding: 6rem 5% 2rem; /* Reduce padding for smaller screens */
+  }
+
+  /* ✅ Home Section */
+  .home {
+    flex-direction: column; /* Stack content vertically */
+    text-align: center; /* Center align text */
+    gap: 2rem; /* Reduce spacing */
+  }
+
+  .home-detail h1 {
+    margin-top: 16px;
+    font-size: 1.4rem; /* Adjust heading for mobile */
+  }
+
+  .home-detail h2 {
+    font-size: 14px; /* Reduce subheading size */
+  }
+
+  .home-detail p {
+    font-size: 14px;
+    margin-top: 5px;
+    line-height: 1.3;
+    text-align: start;
+  }
+
+  /* ✅ Adjust Buttons & Links */
+  .home-detail .btn-links {
+    flex-direction: column; /* Stack buttons vertically */
+    align-items: center;
+  }
+
+  /* .btn-links .btn {
+    font-size: 14px;
+    margin-right: 11.4rem;
+    height: 50px;
+    padding: .1rem;
+  } */
+
+  .btn-links .links {
+    margin: 0.5rem 0;
+  }
+
+  .home-detail .btn-links .links a {
+    font-size: 1rem; 
+    padding: 4px;
+    width: 38px;
+    height: 38px;
+  }
+
+  /* ✅ Adjust Profile Image */
+  .home-img .img-box {
+    width: 65vw;
+    height: 65vw;
+  }
+
+  .home-img .img-box .img-item img {
+    width: 75%; /* Reduce image size */
+  }
+
+  /* ✅ Fix Contact Section */
+  .contact-container {
+    grid-template-columns: 1fr; /* Make it single-column */
+    padding: 2rem;
+    gap: 1.5rem;
+  }
+
+  .contact-box {
+    padding: 1.5rem;
+  }
+
+  .contact-box h2 {
+    font-size: 24px; /* Reduce heading size */
+  }
+
+  .contact-detail {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .contact-detail i {
+    font-size: 20px;
+    margin-bottom: 5px;
+  }
+
+  /* ✅ Ensure Footer & Other Sections Fit Well */
+  footer {
+    text-align: center;
+    font-size: 14px;
+    padding: 1rem;
+  }
+  .skills-container{
+    display: grid;
+    grid-template-columns: repeat(1, 1fr); /* Always 4 items per row */
+
+  }
+  .resume-container {
+    grid-template-columns: 1fr; /* Stack content vertically */
+    gap: 2rem;
+    padding: 1rem;
+    text-align: start;
+
+  }
+
+  /* 📌 Center "Why Hire Me?" Section */
+  .resume-box {
+    text-align: start;
+    width: 80%;
+  }
+
+  .resume-container h2 {
+    font-size: 1.5rem;
+  }
+
+  .resume-container p {
+    font-size: 14px;
+  }
+
+  /* 📌 Resize Resume Buttons */
+  .resume-container .resume-btn {
+    height: 50px;
+    font-size: 14px;
+    margin: 4px;
+    width: 100%;
+  }
+
+  /* 📌 Adjust Experience Section */
+  .resume-title span {
+    text-align: start;
+    margin-left: 2px;
+    font-size: 12px;
+  }
+
+  .resume-ul-list li {
+    font-size: 15px;
+    margin: 10px 48px;
+    word-spacing: 2px;
+    width: 80%;
+  }
+  .resume-ul-list p{
+    margin-left: 45px;
+    
+
+  }
+  .resume-skills-item .resume-title{
+    display: flex;
+    flex-direction: column;
+    text-align: start;
+  }
+  
+  /* 📌 Education List: Single Column */
+  .education-detail-education{
+    width: 100%;
+  }
+  .education-list {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    text-align: start;
+    width: 130%;
+  }
+
+  .education-list .education-item {
+    padding: 10px;
+    text-align: start;
+  }
+
+  /* 📌 Skills Section Grid */
+  .resume-skills-list {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    width: 100%;
+  }
+
+  .resume-skills-list .resume-skills-item {
+    padding: 20px;
+  }
+
+  /* 📌 About Me Section: Better Spacing */
+  .resume-about-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+  }
+
+  .resume-about-item {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    /* background: var(--second-bg-color); */
+    /* border: 1px solid var(--main-color); */
+    transition: 0.3s;
+    text-align: start;
+  }
+
+  .resume-about-item:hover {
+    /* background: var(--main-color); */
+    color: var(--bg-color);
+  }
+
+  .resume-about-item p {
+    font-size: 14px;
+    margin: 0;
+  }
+
+  .resume-about-item span, 
+  .resume-about-item span a {
+    font-size: 14px;
+    color: var(--main-color);
+  }
+
+  .resume-about-item a {
+    word-break: break-word; /* Ensure long links wrap properly */
+  }
+  .project-box p{
+    font-size: 15px;
+    margin-top: 8px;
+    font-weight:540;
+    line-height: 1.4;
+    width: 95%;
+  }
+  .project-box .project-carousel{
+    width: 95%;
+    height: 50vw;
+    overflow: hidden;
+    border: 1px solid var(--main-color);
+  }
+  .project-carousel .img-slide .img-item img{
+    width: 100%;
+    height: 50vw;
+    border-radius: 10px;
+  
+  }
+  .project-detail .tech{
+    width: 95%;
+  }
+  .project-box .navigation{
+    text-align: right;
+    margin-top: 10px;
+    margin-right: 20px;
+  }
+  .project-box .navigation button{
+    padding: 10px 20px;
+    margin: 6px;
+    background-color: var(--second-bg-color);
+    border: 1px solid var(--main-color);
+    border-radius: 8px;
+  }
+  .project-box .navigation button i{
+    color: var(--main-color);
+    cursor: pointer;
+  }
+  .contact-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1.5rem;
+    gap: 1.5rem;
+  }
+
+  .contact-box {
+    width: 100%;
+    padding: 1.2rem;
+    text-align: center;
+  }
+
+  /* 📌 Contact Details (Stacked Layout) */
+  .contact-detail {
+    flex-direction: row;
+    text-align: start;
+    padding: 10px;
+    width: 100%;
+  }
+
+  .contact-detail i {
+    font-size: 20px;
+    margin-bottom: 5px;
+    padding: 8px;
+  }
+
+  .contact-detail .detail p {
+    font-size: 14px;
+  }
+
+  /* 📌 Form Styling */
+  .contact-box form {
+    padding: 1.2rem;
+    border-radius: 8px;
+  }
+
+  .contact-box .field-box {
+    grid-template-columns: 1fr; /* Single column */
+    gap: 12px;
+  }
+
+  .contact-box .field-box input,
+  .contact-box .field-box textarea {
+    font-size: 14px;
+    padding: 12px;
+    width: 100%;
+  }
+
+  .contact-box .field-box textarea {
+    height: 100px;
+  }
+
+  /* 📌 Adjust Submit Button */
+  .contact-box .btn {
+    width: 100%;
+    padding: 0.8rem;
+    font-size: 14px;
+    margin-top: 0.8rem;
+    border-radius: 5px;
+  }
+ 
+}
+
+
+
