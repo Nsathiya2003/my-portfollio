@@ -24,8 +24,7 @@ html {
   --white-color:#fff;
   --diabled-color:#fff3;
 }
- /* Home section*/
-/* ✅ Header Styling */
+
 header {
   position: fixed;
   top: 0;
@@ -39,7 +38,6 @@ header {
   z-index: 100;
 }
 
-/* ✅ Hide Menu Icon on Large Screens */
 #menu-icon {
   display: none;
   font-size: 28px;
@@ -47,10 +45,10 @@ header {
   cursor: pointer;
 }
 
-/* ✅ Navigation Styling */
 nav {
   display: flex;
   gap: 2rem;
+  margin-right: 90px;
 }
 
 nav a {
@@ -65,14 +63,11 @@ nav a.active {
   color: var(--main-color);
 }
 
-/* 📌 Responsive Navbar for Mobile */
 @media screen and (max-width: 768px) {
-  /* ✅ Show Menu Icon on Small Screens */
   #menu-icon {
     display: block;
   }
 
-  /* ✅ Hide Nav Links Initially */
   nav {
     position: absolute;
     top: 100%;
@@ -83,10 +78,9 @@ nav a.active {
     text-align: center;
     gap: 1rem;
     padding: 1.5rem 0;
-    display: none; /* Hidden by default */
+    display: none; 
   }
 
-  /* ✅ Show Navbar When Active */
   nav.active {
     display: flex;
   }
@@ -272,6 +266,54 @@ section.active {
     transform: rotate(360deg);
   }
 }
+@keyframes slideDownFade {
+  0% {
+    transform: translateY(-100px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideRightFade {
+  0% {
+    transform: translateX(50px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.home-img .img-box,
+.home-detail h1,
+.home-detail h2,
+.home-detail p,
+.btn-links {
+  opacity: 0;
+  transform: translateY(-100px); /* Hide above */
+}
+
+.home.active .home-img .img-box {
+  animation: slideDownFade 1s ease-in-out forwards;
+}
+
+.home.active .home-detail {
+  animation: slideRightFade 1s ease-in-out forwards;
+}
+
+.home.active .home-detail h1,
+.home.active .home-detail h2,
+.home.active .home-detail p,
+.home.active .btn-links {
+  animation: slideRightFade 1.5s ease-in-out forwards;
+  animation-delay: 0.7s;
+}
+
+
 .home-img .img-box .img-item{
   position: relative;
   width: 100%;
@@ -315,7 +357,7 @@ section.active {
 }
 .skills-container .skills-box:hover{
   border-color: var(--main-color);
-  transform: scale(1.02);
+  transform: scale(20px);
   cursor: pointer;
 }
 .skills-box .icon {
@@ -363,6 +405,41 @@ section.active {
   font-size: 16px;
   margin-top: 10px;
 
+}
+/* Fade and slide in effect */
+@keyframes fadeInUp {
+  0% {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.skills-box, .heading {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.skills.active .skills-box {
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+.skills.active .skills-box:nth-child(1) { animation-delay: 0.1s; }
+.skills.active .skills-box:nth-child(2) { animation-delay: 0.2s; }
+.skills.active .skills-box:nth-child(3) { animation-delay: 0.3s; }
+.skills.active .skills-box:nth-child(4) { animation-delay: 0.4s; }
+.skills.active .skills-box:nth-child(5) { animation-delay: 0.5s; }
+.skills.active .skills-box:nth-child(6) { animation-delay: 0.6s; }
+.skills.active .skills-box:nth-child(7) { animation-delay: 0.7s; }
+.skills.active .skills-box:nth-child(8) { animation-delay: 0.8s; }
+.skills.active .skills-box:nth-child(9) { animation-delay: 0.9s; }
+
+.skills.active .heading {
+  animation: fadeInUp 0.8s ease-out forwards;
+  animation-delay: 0.5s;
 }
 
 /* resume section */
@@ -458,60 +535,40 @@ section.active {
   justify-content: center;
   flex-direction: column;
   align-items: center;
-}
-/* .resume-skills-item span{
-  position: absolute;
-  top: -20%;
-  background: var(--white-color);
-  color: var(--bg-color);
-  padding: 20px;
-  border-radius: 5px;
-  pointer-events: none;
-  opacity: 0;
-  transform: scale(4px);
-  transition: .2s;
-}
-.resume-skills-item:hover span{
-  top: -20%;
-  opacity: 1;
-  transform: scale(1);
-} */
-/* 📌 General Styling */
-/* 📌 Modern About Section */
+ }
 .resume-about-list {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 20px;
   padding: 10px;
+  margin-top: 80px;
   width: 100%;
 }
 
-/* 📌 Beautiful Card Style */
 .resume-about-item {
   display: flex;
   align-items: center;
+  margin-top: 10px;
   background: linear-gradient(135deg, #2a2e35, #1f242d);
   padding: 15px;
   border-radius: 12px;
   border: 1px solid var(--main-color);
-  box-shadow: 0px 5px 15px rgba(0, 255, 255, 0.2);
+  box-shadow: 0px 3px 3px rgba(0, 255, 255, 0.2);
   transition: 0.4s ease-in-out;
 }
 
 .resume-about-item:hover {
   transform: translateY(-5px);
-  box-shadow: 0px 8px 20px rgba(0, 255, 255, 0.4);
+  box-shadow: 0px 4px 4px rgba(0, 255, 255, 0.4);
   cursor: pointer;
 }
 
-/* 📌 Icons for Each Detail */
 .resume-about-item i {
   font-size: 24px;
   color: var(--main-color);
   margin-right: 12px;
 }
 
-/* 📌 Text Styling */
 .resume-about-item p {
   font-size: 14px;
   color: var(--white-color);
@@ -519,7 +576,6 @@ section.active {
   font-weight: 500;
 }
 
-/* 📌 Highlighted Text */
 .resume-about-item span, 
 .resume-about-item span a {
   font-weight: bold;
@@ -532,13 +588,119 @@ section.active {
   text-decoration: underline;
   cursor: pointer;
 }
+.resume-sections div {
+  display: none;
+}
 
-/* 📌 Mobile Friendly (≤ 390px) */
+.resume-sections .active {
+  display: block;
+}
+@keyframes slideDownFade {
+  0% {
+    transform: translateY(-100px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideRightFade {
+  0% {
+    transform: translateX(50px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.home-img .img-box,
+.home-detail h1,
+.home-detail h2,
+.home-detail p,
+.btn-links,
+.resume-container {
+  opacity: 0;
+  transform: translateY(-50px);
+}
+
+.home.active .home-img .img-box {
+  animation: slideDownFade 1s ease-in-out forwards;
+}
+
+.home.active .home-detail {
+  animation: slideRightFade 1s ease-in-out forwards;
+}
+
+.home.active .home-detail h1,
+.home.active .home-detail h2,
+.home.active .home-detail p,
+.home.active .btn-links {
+  animation: slideRightFade 1.5s ease-in-out forwards;
+  animation-delay: 0.7s;
+}
+
+.resume-container {
+  opacity: 0;
+  transform: scale(0.9);
+}
+
+.resume.active .resume-container {
+  animation: fadeIn 1s ease-in-out forwards;
+}
+
+.resume-container .resume-btn {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.resume.active .resume-container .resume-btn {
+  animation: slideDownFade 1s ease-in-out forwards;
+  animation-delay: 0.5s;
+}
+
+.education-list .education-item {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.resume.active .education-list .education-item {
+  animation: fadeIn 1s ease-in-out forwards;
+  animation-delay: 0.3s;
+}
+
+.resume-skills-list .resume-skills-item {
+  opacity: 0;
+  transform: scale(0.8);
+}
+
+.resume.active .resume-skills-list .resume-skills-item {
+  animation: fadeIn 1s ease-in-out forwards;
+  animation-delay: 0.3s;
+}
+
 @media screen and (max-width: 390px) {
   .resume-about-list {
     display: flex;
     flex-direction: column;
     gap: 12px;
+  }
+  .resume-sections .active {
+    display: block;
   }
 
   .resume-about-item {
@@ -566,18 +728,17 @@ section.active {
 }
 
 
-/* 📌 Small Screen Styling (≤ 390px) */
 @media screen and (max-width: 390px) {
  
   .resume-about-list {
     display: flex;
     flex-direction: column;
-    align-items: center; /* Center the items */
+    align-items: center;
     gap: 10px;
   }
 
   .resume-about-item {
-    width: 90%; /* Increase width but keep it balanced */
+    width: 90%; 
     padding: 20px;
     font-size: 14px;
     text-align: center;
@@ -634,12 +795,12 @@ section.active {
 .project-detail .live-github a i{
   color: var(--white-color);
 }
-.project-box .live-github a:first-child {
+/* .project-box .live-github a:first-child {
   margin-right: 0.5rem;
-}
-.project-box .live-github a:first-child i{
+} */
+/* .project-box .live-github a:first-child i{
   transform: rotate(135deg);
-}
+} */
 .project-box .live-github a span{
   position: absolute;
   top: -50%;
@@ -714,6 +875,65 @@ section.active {
   background-color: #ccc; 
   color: #666; 
 }
+@keyframes fadeInScale {
+  0% {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes slideUpFade {
+  0% {
+    transform: translateY(40px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.projects .project-container,
+.projects .project-box,
+.projects .img-slide .img-item {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.projects.active .project-container {
+  animation: fadeInScale 1s ease-in-out forwards;
+}
+
+.projects.active .project-box {
+  animation: slideUpFade 1s ease-in-out forwards;
+  animation-delay: 0.3s;
+}
+
+.projects.active .img-slide .img-item {
+  animation: fadeInScale 1s ease-in-out forwards;
+  animation-delay: 0.5s;
+}
+
+.project-carousel .img-slide {
+  transition: transform 0.5s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+.project-box .navigation button:hover {
+  /* background-color: var(--main-color); */
+  color: var(--white-color);
+  transition: 0.3s ease-in-out;
+  cursor: pointer;
+}
+
+.project-detail .live-github a:hover {
+  transform: scale(1.1);
+  transition: 0.3s ease-in-out;
+}
+
 .contact-container{
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(25rem, 1fr));
@@ -856,13 +1076,11 @@ section.active {
   transition: transform 0.5s ease-in-out;
 }
 
-/* Trigger animation only on first load */
 .bars-box.active .bar {
   animation: show-bars 0.5s ease-in-out both;
   animation-delay: calc(0.1s * var(--i));
 }
 
-/* Keyframes for the bar animation */
 @keyframes show-bars {
   0% {
     transform: translateY(-100%);
@@ -872,44 +1090,53 @@ section.active {
   }
 }
 .pdf-modal {
-  position: fixed; /* Ensures it covers everything */
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.7);
+  height: 80%; /* Full-screen overlay */
   display: flex;
   justify-content: center;
-  align-items: center;
-  z-index: 9999; /* Makes sure it's always on top */
+  align-items: center; 
+  z-index: 9999;
+  margin-bottom: 50%;
+  
 }
 
 .pdf-container {
   background: #fff;
-  padding: 20px;
-  cursor: pointer;
-  border-radius: 8px;
+  padding: 15px;
+  border-radius: 10px;
   text-align: center;
-  max-width: 60%;
-  max-height: 90%;
-  overflow: auto;
+  width: 70vw; 
+  height: auto; 
+  max-height: 80vh; 
+  overflow: auto; 
   position: relative;
   z-index: 10000;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 40%;
 }
 
+.resume-img {
+  width: 100%; 
+  height: auto; 
+}
 
 .close-btn {
   position: absolute;
   top: 10px;
-  right: 10px;
-  background: transparent;
+  right: 15px;
   color: red;
   border: none;
-  /* padding: 5px 10px; */
   cursor: pointer;
-  font-size: 18px;
+  font-size: 16px;
+  padding: 5px 10px;
   border-radius: 5px;
+  background-color: transparent;
 }
+
 
 .resume-img {
   max-width: 100%;
@@ -923,7 +1150,6 @@ section.active {
 /* ========== Mobile Responsive Styling (Max Width: 390px) ========== */
 @media screen and (max-width: 395px) {
 
-  /* ✅ Responsive Header */
   header {
     padding: 1rem 5%;
     flex-direction: row;
@@ -937,24 +1163,22 @@ section.active {
 
   nav a {
     font-size: 14px;
-    margin-left: 1rem; /* Reduce spacing */
+    margin-left: 1rem; 
   }
 
-  /* ✅ Adjust Section Layout */
   section {
-    padding: 6rem 5% 2rem; /* Reduce padding for smaller screens */
+    padding: 6rem 5% 2rem; 
   }
 
-  /* ✅ Home Section */
   .home {
-    flex-direction: column; /* Stack content vertically */
-    text-align: center; /* Center align text */
-    gap: 2rem; /* Reduce spacing */
+    flex-direction: column; 
+    text-align: center; 
+    gap: 2rem; 
+    margin-top: 80px;
   }
 
   .home-detail h1 {
-    margin-top: 16px;
-    font-size: 1.4rem; /* Adjust heading for mobile */
+    font-size: 1.4rem; 
   }
 
   .home-detail h2 {
@@ -968,9 +1192,8 @@ section.active {
     text-align: start;
   }
 
-  /* ✅ Adjust Buttons & Links */
   .home-detail .btn-links {
-    flex-direction: column; /* Stack buttons vertically */
+    flex-direction: column; 
     align-items: center;
   }
 
@@ -992,19 +1215,17 @@ section.active {
     height: 38px;
   }
 
-  /* ✅ Adjust Profile Image */
   .home-img .img-box {
     width: 65vw;
     height: 65vw;
   }
 
   .home-img .img-box .img-item img {
-    width: 75%; /* Reduce image size */
+    width: 75%; 
   }
 
-  /* ✅ Fix Contact Section */
   .contact-container {
-    grid-template-columns: 1fr; /* Make it single-column */
+    grid-template-columns: 1fr;
     padding: 2rem;
     gap: 1.5rem;
   }
@@ -1014,7 +1235,7 @@ section.active {
   }
 
   .contact-box h2 {
-    font-size: 24px; /* Reduce heading size */
+    font-size: 24px;
   }
 
   .contact-detail {
@@ -1027,7 +1248,6 @@ section.active {
     margin-bottom: 5px;
   }
 
-  /* ✅ Ensure Footer & Other Sections Fit Well */
   footer {
     text-align: center;
     font-size: 14px;
@@ -1035,18 +1255,17 @@ section.active {
   }
   .skills-container{
     display: grid;
-    grid-template-columns: repeat(1, 1fr); /* Always 4 items per row */
+    grid-template-columns: repeat(1, 1fr); 
 
   }
   .resume-container {
-    grid-template-columns: 1fr; /* Stack content vertically */
+    grid-template-columns: 1fr; 
     gap: 2rem;
     padding: 1rem;
     text-align: start;
 
   }
 
-  /* 📌 Center "Why Hire Me?" Section */
   .resume-box {
     text-align: start;
     width: 80%;
@@ -1060,7 +1279,6 @@ section.active {
     font-size: 14px;
   }
 
-  /* 📌 Resize Resume Buttons */
   .resume-container .resume-btn {
     height: 50px;
     font-size: 14px;
@@ -1068,7 +1286,6 @@ section.active {
     width: 100%;
   }
 
-  /* 📌 Adjust Experience Section */
   .resume-title span {
     text-align: start;
     margin-left: 2px;
@@ -1092,7 +1309,6 @@ section.active {
     text-align: start;
   }
   
-  /* 📌 Education List: Single Column */
   .education-detail-education{
     width: 100%;
   }
@@ -1108,7 +1324,6 @@ section.active {
     text-align: start;
   }
 
-  /* 📌 Skills Section Grid */
   .resume-skills-list {
     grid-template-columns: repeat(3, 1fr);
     gap: 10px;
@@ -1119,12 +1334,12 @@ section.active {
     padding: 20px;
   }
 
-  /* 📌 About Me Section: Better Spacing */
   .resume-about-list {
     display: flex;
     flex-direction: column;
-    gap: 10px;
     text-align: center;
+    margin-bottom:70px;
+
   }
 
   .resume-about-item {
@@ -1154,7 +1369,7 @@ section.active {
   }
 
   .resume-about-item a {
-    word-break: break-word; /* Ensure long links wrap properly */
+    word-break: break-word; 
   }
   .project-box p{
     font-size: 15px;
@@ -1208,7 +1423,6 @@ section.active {
     text-align: center;
   }
 
-  /* 📌 Contact Details (Stacked Layout) */
   .contact-detail {
     flex-direction: row;
     text-align: start;
@@ -1226,14 +1440,13 @@ section.active {
     font-size: 14px;
   }
 
-  /* 📌 Form Styling */
   .contact-box form {
     padding: 1.2rem;
     border-radius: 8px;
   }
 
   .contact-box .field-box {
-    grid-template-columns: 1fr; /* Single column */
+    grid-template-columns: 1fr; 
     gap: 12px;
   }
 
@@ -1247,8 +1460,7 @@ section.active {
   .contact-box .field-box textarea {
     height: 100px;
   }
-
-  /* 📌 Adjust Submit Button */
+  
   .contact-box .btn {
     width: 100%;
     padding: 0.8rem;
@@ -1256,7 +1468,33 @@ section.active {
     margin-top: 0.8rem;
     border-radius: 5px;
   }
- 
+  .pdf-modal {
+    position: fixed; 
+    top: 0;
+    left: 0;
+    right: 10px;
+    width: 105%;
+    height: 250%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999; 
+  }
+  
+  .pdf-container {
+    background: #fff;
+    right: 10px;
+    padding: 20px;
+    cursor: pointer;
+    border-radius: 8px;
+    text-align: center;
+    max-width: 160%;
+    max-height: 150%;
+    overflow: auto;
+    position: relative;
+    z-index: 10000;
+    margin-bottom: 180%;
+  } 
 }
 
 

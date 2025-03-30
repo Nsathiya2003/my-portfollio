@@ -151,6 +151,7 @@ function HomePage() {
   const handleMenuToggle = () => {
     setMenuOpen(!menuOpen);
   };
+ 
 
   return (
     <body>
@@ -159,10 +160,8 @@ function HomePage() {
       <header>
   <a href="#" className="logo">Sathiya</a>
 
-  {/* ✅ Menu Icon (Only Visible on Small Screens) */}
   <i className={`bx bx-menu ${menuOpen ? "bx-x" : ""}`} id="menu-icon" onClick={handleMenuToggle}></i>
 
-  {/* ✅ Navigation Menu */}
   <nav className={menuOpen ? "active" : ""}>
     <a href="#home-section" className={activateSection === "home" ? "active" : ""} onClick={() => handleSectionChange("home")}>
       Home
@@ -184,17 +183,26 @@ function HomePage() {
 
 
       {/*  Bars background*/}
-      <div className={`bars-box ${isFirstLoad ? "active" : ""}`}>
+      {/* <div className={`bars-box ${isFirstLoad ? "active" : ""}`}>
       {[...Array(6)].map((_, i) => (
         <div key={i} className="bar" style={{ "--i": i + 1 }}></div>
       ))}
-    </div>
+    </div> */}
 
 
         {/* ---Home section--- */}
         <section className={`home ${activateSection === 'home' ? 'active' : ''}`}>
         
-        <div className="home-detail">
+       
+          <div className="home-img">
+              <div className="img-box">
+                <div className="img-item">
+                  <img src={profile} alt="Profile" />
+                </div>
+              </div>
+            
+            </div> 
+            <div className="home-detail">
           <h1>SATHIYA N</h1>
           <h2>
             I'm a  
@@ -229,15 +237,7 @@ function HomePage() {
                 <a href="http://www.whatsapp.com"><i className='bx bxl-whatsapp' target="_blank"></i></a>
            </div>
           </div>
-        </div>  
-          <div className="home-img">
-              <div className="img-box">
-                <div className="img-item">
-                  <img src={profile} alt="Profile" />
-                </div>
-              </div>
-            
-            </div>   
+        </div>    
       </section>
       <section className={`skills ${activateSection === 'skills' ? 'active' : ''}`}>
      
@@ -455,12 +455,12 @@ function HomePage() {
                   <div className="resume-about-item">
                     <p>Name <span>Sathiya Nallathambi</span></p>
                   </div>
-                  <div className="resume-about-item">
+                  {/* <div className="resume-about-item">
                     <p>Gender <span>Female</span></p>
-                  </div>
-                  <div className="resume-about-item">
+                  </div> */}
+                  {/* <div className="resume-about-item">
                     <p>Age <span>22 Years Old</span></p>
-                  </div>
+                  </div> */}
                   <div className="resume-about-item">
                     <p>City <span>Salem</span></p>
                   </div>
@@ -503,12 +503,13 @@ function HomePage() {
                     <p>{project.description}</p>
                     <div className="tech">
                       <p>{project.tech}</p>
+                      
                     </div>
                     <div className="live-github">
-                      <a href={project.liveLink} target="_blank" rel="noopener noreferrer">
+                      {/* <a href={project.liveLink} target="_blank" rel="noopener noreferrer">
                         <i className="bx bx-arrow-back"></i>
                         <span>Live Project</span>
-                      </a>
+                      </a> */}
                       <a href={project.githubLink} target="_blank" rel="noopener noreferrer">
                         <i className="bx bxl-github"></i>
                         <span>Github Repository</span>
